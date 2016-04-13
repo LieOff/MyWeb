@@ -1,15 +1,26 @@
 package com.github.u1152.uportal.model;
 
+import javax.persistence.*;
 /**
  * author Aleksandr
  */
+@Entity
+@Table(name = "author")
 
 public class Author {
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue
     private int id;
+    @Column(name = "FirstName")
     private String firstName;
+    @Column(name = "Patronymic")
     private String midName;
+    @Column(name = "SurName")
     private String lastName;
+    @Column(name = "eMail")
     private String eMail;
+    @Column(name = "image")
     private String image;
 
     public Author() {

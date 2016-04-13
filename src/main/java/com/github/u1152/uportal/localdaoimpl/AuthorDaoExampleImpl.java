@@ -2,47 +2,68 @@ package com.github.u1152.uportal.localdaoimpl;
 
 import com.github.u1152.uportal.dao.AuthorDao;
 import com.github.u1152.uportal.model.Author;
+import com.github.u1152.uportal.util.HibernateUtil;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * author Aleksandr
  */
+
 public class AuthorDaoExampleImpl implements AuthorDao{
     private static final Random r = new Random();
     private static final Map<Integer, Author> AUTHOR_MAP = new HashMap<Integer, Author>();
     public static final String IMAGE = "img/placeholders/avatar.jpg";
 
-
     public AuthorDaoExampleImpl() {
-        AUTHOR_MAP.put(0, new Author(0, "Ivan", "Ivanovich", "Ivanov", "ivan@u1152.ru", IMAGE));
-        AUTHOR_MAP.put(1, new Author(1, "Petr", "P", "Petrov", "petr@u1152.ru", IMAGE));
-        AUTHOR_MAP.put(2, new Author(2, "Sergey", "S", "Sergeev", "sergeev@u1152.ru", IMAGE));
-        AUTHOR_MAP.put(3, new Author(3, "Fedor", "F", "Fedorov", "fedorov@u1152.ru", IMAGE));
+
     }
 
     public void add(Author author) {
-        author.setId(r.nextInt(Integer.MAX_VALUE));
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        //author.setId(r.nextInt(Integer.MAX_VALUE));
         author.setImage(IMAGE);
-        AUTHOR_MAP.put(author.getId(), author);
+        //AUTHOR_MAP.put(author.getId(), author);
+        session.beginTransaction();
+        session.save(author);
+        session.getTransaction().commit();
     }
 
     public void delete(Author author) {
-        AUTHOR_MAP.remove(author.getId());
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.delete(author);
+        session.flush();
+        session.getTransaction().commit();
     }
 
     public void update(Author author) {
-        if (AUTHOR_MAP.containsKey(author.getId())) {
-            author.setImage(IMAGE);
-            AUTHOR_MAP.put(author.getId(), author);
-        }
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        //author = (Author) session.merge(author);
+        session.update(author);
+        session.getTransaction().commit();
     }
 
     public List<Author> getAll() {
-        return new ArrayList<>(AUTHOR_MAP.values());
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Query q = session.createQuery("from Author");
+        List<Author> AllAuthors = q.list();
+        session.getTransaction().commit();
+        return AllAuthors;
     }
 
     public Author getById(int id) {
-        return AUTHOR_MAP.get(id);
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Query q = session.createQuery("from Author A where A.id= :author_id");
+        q.setParameter("author_id",id);
+        List<Author> Aut = q.list();
+        return Aut.get(0);
     }
 }

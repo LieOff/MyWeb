@@ -21,7 +21,8 @@
                                  src="<c:out value="${author.image}"/>"
                             data-holder-rendered="true" style="height: 220px; width:220px   ; display: block;">
                         </div>
-
+                        <div class="col-md-4">
+                        </div>
                         <div class="col-md-8">
                             <legend>
                                 <c:out value="${author.lastName}"/>

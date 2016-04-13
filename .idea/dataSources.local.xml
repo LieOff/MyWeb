@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - sapr@localhost" uuid="ff3880e8-5c29-48a4-b07c-1bc3d4bdb59d">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>sapr.*</schema-pattern>
+      <default-schemas>sapr.*</default-schemas>
+    </data-source>
+  </component>
+</project>

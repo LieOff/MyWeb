@@ -1,10 +1,9 @@
 package com.github.u1152.uportal.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-/**
- * Created by Илья on 10.04.2016.
- */
+
 public class HibernateUtil {
+
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
@@ -21,4 +20,10 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
+    public static void shutdown() {
+        // Close caches and connection pools
+        getSessionFactory().close();
+    }
+
 }
