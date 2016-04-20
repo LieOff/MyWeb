@@ -20,6 +20,9 @@
                             <img alt="placeholder"
                                  src="<c:out value="${author.image}"/>"
                             data-holder-rendered="true" style="height: 220px; width:220px   ; display: block;">
+                        <span class="btn btn-default btn-file">
+                            Browse <input type="file">
+                        </span>
                         </div>
                         <div class="col-md-4">
                         </div>
