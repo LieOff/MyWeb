@@ -1,6 +1,7 @@
 package com.github.u1152.uportal.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Илья on 20.04.2016.
@@ -18,8 +19,7 @@ public class Articals {
     private String Description;
     @Column(name = "DateCreate")
     private String DateCreate;
-    public Articals() {
-    }
+    public  Articals(){}
 
     public  Articals(int ID,String TextArticals, String Description, String DateCreate){
         this.id = ID;
@@ -64,4 +64,14 @@ public class Articals {
     }
 
 
+    @ManyToMany(mappedBy = "courses")
+    private Collection<Author> art;
+
+    public Collection<Author> getArt() {
+        return art;
+    }
+
+    public void setArt(Collection<Author> art) {
+        this.art = art;
+    }
 }

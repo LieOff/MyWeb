@@ -1,5 +1,8 @@
 package com.github.u1152.uportal.servlets;
 
+import com.github.u1152.uportal.dao.ArticalsDao;
+import com.github.u1152.uportal.localdaoimpl.ArticalsDaoExampleImpl;
+
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -7,4 +10,10 @@ import javax.servlet.annotation.WebServlet;
  */
 @WebServlet("/articals")
 public class ArticalsServlet {
+    private ArticalsDao authorDao;
+
+    public ArticalsServlet() {
+        authorDao = new ArticalsDaoExampleImpl();
+    }
+
 }

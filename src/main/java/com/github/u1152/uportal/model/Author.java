@@ -1,6 +1,9 @@
 package com.github.u1152.uportal.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * author Aleksandr
  */
@@ -8,10 +11,24 @@ import javax.persistence.*;
 @Table(name = "author")
 
 public class Author {
+
+    private Set<Articals> articalsSet = new HashSet<Articals>(0);
+
     @Id
     @Column(name = "ID")
     @GeneratedValue
     private int id;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "articles_author", joinColumns = { @JoinColumn(name = "IDAuthor") }, inverseJoinColumns = { @JoinColumn(name = "IDArt") })
+    public Set<Articals> getCourses() {
+        return this.articalsSet;
+    }
+    public void setCourses(Set<Articals> articalsSet) {
+        this.articalsSet = articalsSet;
+    }
+
+
     @Column(name = "FirstName")
     private String firstName;
     @Column(name = "Patronymic")
@@ -130,4 +147,5 @@ public class Author {
                 ", IMAGE='" + image + '\'' +
                 '}';
     }
+
 }

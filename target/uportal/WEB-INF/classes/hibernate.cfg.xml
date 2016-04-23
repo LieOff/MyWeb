@@ -21,7 +21,7 @@
         <property name="current_session_context_class">thread</property>
 
         <mapping class="com.github.u1152.uportal.model.Author" />
-
+        <mapping class="com.github.u1152.uportal.model.Articals"/>
         <!-- <mapping resource="com/mkyong/user/DBUser.hbm.xml"></mapping> -->
     </session-factory>
 </hibernate-configuration>

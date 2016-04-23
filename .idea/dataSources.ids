@@ -14,19 +14,19 @@
       <column name="DateCreate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
-    <table name="author" schema="" catalog="sapr" type="TABLE">
+    <table name="articles_author" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="FirstName" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <column name="SurName" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <column name="Patronymic" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <column name="eMail" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="image" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="IDAuthor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IDArt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
-    <table name="teach_art" schema="" catalog="sapr" type="TABLE">
+    <table name="author" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="IDTeach" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="IDArt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="eMail" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FirstName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SurName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Patronymic" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
   </data-source>
