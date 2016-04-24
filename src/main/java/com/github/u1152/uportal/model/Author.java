@@ -11,34 +11,31 @@ import java.util.Set;
 @Table(name = "author")
 
 public class Author {
-
-    private Set<Articals> articalsSet = new HashSet<Articals>(0);
-
     @Id
     @Column(name = "ID")
     @GeneratedValue
     private int id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "articles_author", joinColumns = { @JoinColumn(name = "IDAuthor") }, inverseJoinColumns = { @JoinColumn(name = "IDArt") })
-    public Set<Articals> getCourses() {
-        return this.articalsSet;
-    }
-    public void setCourses(Set<Articals> articalsSet) {
-        this.articalsSet = articalsSet;
-    }
-
-
     @Column(name = "FirstName")
     private String firstName;
+
     @Column(name = "Patronymic")
     private String midName;
+
     @Column(name = "SurName")
     private String lastName;
+
     @Column(name = "eMail")
     private String eMail;
+
     @Column(name = "image")
     private String image;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "articles_author",
+            joinColumns = {@JoinColumn(name = "IDAuthor")},
+            inverseJoinColumns = {@JoinColumn(name = "IDArt")})
+    private Set<Articals> articles = new HashSet<>(0);
 
     public Author() {
     }
@@ -58,6 +55,14 @@ public class Author {
         this.lastName = lastName;
         this.eMail = eMail;
         this.image = image;
+    }
+
+    public Set<Articals> getArticles() {
+        return this.articles;
+    }
+
+    public void getArticles(Set<Articals> articles) {
+        this.articles = articles;
     }
 
     public int getId() {

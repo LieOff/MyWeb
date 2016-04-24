@@ -14,7 +14,7 @@
         <property name="show_sql">true</property>
 
         <property name="format_sql">true</property>
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
@@ -22,6 +22,5 @@
 
         <mapping class="com.github.u1152.uportal.model.Author" />
         <mapping class="com.github.u1152.uportal.model.Articals"/>
-        <!-- <mapping resource="com/mkyong/user/DBUser.hbm.xml"></mapping> -->
     </session-factory>
 </hibernate-configuration>
