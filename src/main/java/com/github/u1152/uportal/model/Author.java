@@ -33,8 +33,8 @@ public class Author {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "articles_author",
-            joinColumns = {@JoinColumn(name = "IDAuthor")},
-            inverseJoinColumns = {@JoinColumn(name = "IDArt")})
+            joinColumns = {@JoinColumn(name = "IDAuthor",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "IDArt", referencedColumnName = "id")})
     private Set<Articals> articles = new HashSet<>(0);
 
     public Author() {

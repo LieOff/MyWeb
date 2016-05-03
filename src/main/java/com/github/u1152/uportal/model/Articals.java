@@ -16,25 +16,25 @@ public class Articals {
     private int id;
 
     @Column(name = "TextArticals")
-    private String TextArticals;
+    private String textArticals;
 
     @Column(name = "Description")
-    private String Description;
+    private String description;
 
     @Column(name = "DateCreate")
-    private String DateCreate;
+    private String dateCreate;
 
-    @ManyToMany(mappedBy = "articles")
-    private Set<Author> art = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "articles")
+    private Set<Author> authors = new HashSet<>();
 
     public Articals() {
     }
 
     public Articals(int ID, String TextArticals, String Description, String DateCreate) {
         this.id = ID;
-        this.TextArticals = TextArticals;
-        this.Description = Description;
-        this.DateCreate = DateCreate;
+        this.textArticals = TextArticals;
+        this.description = Description;
+        this.dateCreate = DateCreate;
     }
 
     public int getId() {
@@ -46,35 +46,35 @@ public class Articals {
     }
 
     public String getTextArticals() {
-        return TextArticals;
+        return textArticals;
     }
 
     public void setTextArticals(String TextArt) {
-        this.TextArticals = TextArt;
+        this.textArticals = TextArt;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String Description) {
-        this.Description = Description;
+        this.description = Description;
     }
 
     public String getDateCreate() {
-        return DateCreate;
+        return dateCreate;
     }
 
     public void setDateCreate(String DateCreate) {
-        this.DateCreate = DateCreate;
+        this.dateCreate = DateCreate;
     }
 
-    public Set<Author> getArt() {
-        return art;
+    public Set<Author> getAuthors() {
+        return authors;
     }
 
-    public void setArt(Set<Author> art) {
-        this.art = art;
+    public void setAuthors(Set<Author> art) {
+        this.authors = art;
     }
 
     @Override
@@ -100,9 +100,9 @@ public class Articals {
     public String toString() {
         return "Articals{" +
                 "id=" + id +
-                ", TextArticals='" + TextArticals + '\'' +
-                ", Description='" + Description + '\'' +
-                ", DateCreate='" + DateCreate + '\'' +
+                ", TextArticals='" + textArticals + '\'' +
+                ", Description='" + description + '\'' +
+                ", DateCreate='" + dateCreate + '\'' +
                 '}';
     }
 }

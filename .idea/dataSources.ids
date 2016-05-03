@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - sapr@localhost" uuid="ff3880e8-5c29-48a4-b07c-1bc3d4bdb59d">
+  <data-source name="MySQL - sapr@localhost" uuid="b4229a1b-7e7c-4bea-8a95-f79ce69b56ce">
     <database-info product="MySQL" version="5.0.19-nt" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
@@ -19,6 +19,8 @@
       <column name="IDAuthor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="IDArt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FKF653BDCD458A21DF" columns="IDArt" ref-table="articles" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKF653BDCD458A21DF" unique="false" columns="IDArt"/>
     </table>
     <table name="author" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
