@@ -2,6 +2,7 @@ package com.github.u1152.uportal.servlets;
 
 import com.github.u1152.uportal.dao.AuthorDao;
 import com.github.u1152.uportal.localdaoimpl.AuthorDaoExampleImpl;
+import com.github.u1152.uportal.model.Articals;
 import com.github.u1152.uportal.model.Author;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * author Aleksandr
@@ -65,6 +67,8 @@ public class AuthorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        Author oldauhor = authorDao.getById(Integer.valueOf(request.getParameter("id")));
+        Set<Articals> OldArt = oldauhor.getArticles();
         Author author = new Author();
         author.setFirstName(request.getParameter("firstName"));
         author.setLastName(request.getParameter("lastName"));
@@ -75,6 +79,7 @@ public class AuthorServlet extends HttpServlet {
             authorDao.add(author);
         } else {
             author.setId(Integer.valueOf(stringId));
+            author.setArticles(OldArt);
             authorDao.update(author);
         }
         doGet(request, resp);

@@ -52,7 +52,7 @@
                                         <div class="col-md-9">
                                             <input id="firstName" name="firstName" type="text" placeholder="имя"
                                                    class="form-control input-md"
-                                                   required value="<c:out value=" ${author.firstName}"/>">
+                                                   required value="<c:out value="${author.firstName}"/>">
                                         </div>
                                     </div>
 
@@ -62,7 +62,7 @@
                                         <div class="col-md-9">
                                             <input id="midName" name="midName" type="text" placeholder="Отчество"
                                                    class="form-control input-md"
-                                                   value="<c:out value=" ${author.midName}"/>">
+                                                   value="<c:out value="${author.midName}"/>">
                                         </div>
                                     </div>
 

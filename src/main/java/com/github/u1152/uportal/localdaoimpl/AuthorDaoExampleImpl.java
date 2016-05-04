@@ -64,6 +64,7 @@ public class AuthorDaoExampleImpl implements AuthorDao{
         Query q = session.createQuery("from Author A where A.id= :author_id");
         q.setParameter("author_id",id);
         List<Author> Aut = q.list();
+        session.getTransaction().commit();
         return Aut.get(0);
     }
 }

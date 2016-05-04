@@ -61,7 +61,7 @@ public class Author {
         return this.articles;
     }
 
-    public void getArticles(Set<Articals> articles) {
+    public void setArticles(Set<Articals> articles) {
         this.articles = articles;
     }
 

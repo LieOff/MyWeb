@@ -43,7 +43,7 @@ public class ArticalsDaoExampleImpl implements ArticalsDao {
         Query q = session.createQuery("from Articals");
         List<Articals> AllArticals = q.list();
         session.getTransaction().commit();
-        return AllArticals;
+         return AllArticals;
     }
     public Articals getById(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -51,6 +51,7 @@ public class ArticalsDaoExampleImpl implements ArticalsDao {
         Query q = session.createQuery("from Articals A where A.id= :articals_id");
         q.setParameter("articals_id",id);
         List<Articals> Aut = q.list();
+        session.getTransaction().commit();
         return Aut.get(0);
     }
 
