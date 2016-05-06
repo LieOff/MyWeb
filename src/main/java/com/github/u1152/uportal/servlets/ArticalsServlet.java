@@ -1,8 +1,11 @@
 package com.github.u1152.uportal.servlets;
 
 import com.github.u1152.uportal.dao.ArticalsDao;
+import com.github.u1152.uportal.dao.AuthorDao;
 import com.github.u1152.uportal.localdaoimpl.ArticalsDaoExampleImpl;
+import com.github.u1152.uportal.localdaoimpl.AuthorDaoExampleImpl;
 import com.github.u1152.uportal.model.Articals;
+import com.github.u1152.uportal.model.Author;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by Илья on 20.04.2016.
@@ -18,6 +22,7 @@ import java.io.IOException;
 @WebServlet("/articals")
 public class ArticalsServlet extends HttpServlet {
     private ArticalsDao articalsDao;
+    private AuthorDao authorDao;
     private static final String EDIT_ACTION = "edit";
     private static final String DELETE_ACTION = "delete";
     private static final String ADD_ACTION = "add";
@@ -27,6 +32,7 @@ public class ArticalsServlet extends HttpServlet {
 
     public ArticalsServlet() {
         articalsDao = new ArticalsDaoExampleImpl();
+        authorDao = new AuthorDaoExampleImpl();
     }
 
     @Override
@@ -35,6 +41,8 @@ public class ArticalsServlet extends HttpServlet {
 
         if (action != null) {
             if (action.equals(ADD_ACTION)) {
+                List<Author> authorList =authorDao.getAll();
+                req.setAttribute("authorsall", authorList);
                 RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                 view.forward(req, resp);
                 return;
@@ -44,7 +52,12 @@ public class ArticalsServlet extends HttpServlet {
             Articals artical = articalsDao.getById(Integer.valueOf(id));
             switch (action) {
                 case EDIT_ACTION:
+                    List<Author> authorList =authorDao.getAll();
+                    List<Author> inauthor = new ArrayList<>(artical.getAuthors());
+                    authorList.removeAll(inauthor);
                     req.setAttribute("artical", artical);
+                    req.setAttribute("authorsall", authorList);
+                    req.setAttribute("authorsin", inauthor);
                     RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                     view.forward(req, resp);
                     break;
@@ -68,6 +81,14 @@ public class ArticalsServlet extends HttpServlet {
         articals.setTextArticals(request.getParameter("textArticals"));
         articals.setDescription(request.getParameter("description"));
         articals.setDateCreate(request.getParameter("dateCreate"));
+        String arrayidauthor[] = request.getParameterValues("authors");
+        Set<Author> newAuthor = new HashSet<>();
+        for(String s: arrayidauthor) {
+            newAuthor.add(authorDao.getById(Integer.valueOf(s)));
+        }
+        if (!newAuthor.isEmpty()) {
+            articals.setAuthors(newAuthor);
+        }else {}
         String stringId = request.getParameter("id");
         if (stringId == null || stringId.isEmpty()) {
             articalsDao.add(articals);

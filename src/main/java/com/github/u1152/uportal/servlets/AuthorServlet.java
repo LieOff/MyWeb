@@ -67,17 +67,17 @@ public class AuthorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        Author oldauhor = authorDao.getById(Integer.valueOf(request.getParameter("id")));
-        Set<Articals> OldArt = oldauhor.getArticles();
         Author author = new Author();
         author.setFirstName(request.getParameter("firstName"));
         author.setLastName(request.getParameter("lastName"));
         author.setMidName(request.getParameter("midName"));
         author.seteMail(request.getParameter("eMail"));
         String stringId = request.getParameter("id");
-        if (stringId == null || stringId.isEmpty()) {
+         if (stringId == null || stringId.isEmpty()) {
             authorDao.add(author);
         } else {
+            Author oldauhor = authorDao.getById(Integer.valueOf(stringId));
+            Set<Articals> OldArt = oldauhor.getArticles();
             author.setId(Integer.valueOf(stringId));
             author.setArticles(OldArt);
             authorDao.update(author);

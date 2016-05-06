@@ -24,8 +24,12 @@ public class Articals {
     @Column(name = "DateCreate")
     private String dateCreate;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "articles")
-    private Set<Author> authors = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "articles_author",
+            joinColumns = {@JoinColumn(name = "IDArt",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "IDAuthor", referencedColumnName = "id")})
+    private Set<Author> authors = new HashSet<>(0);
 
     public Articals() {
     }

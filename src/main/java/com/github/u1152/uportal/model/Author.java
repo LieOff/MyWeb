@@ -31,11 +31,9 @@ public class Author {
     @Column(name = "image")
     private String image;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "articles_author",
-            joinColumns = {@JoinColumn(name = "IDAuthor",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "IDArt", referencedColumnName = "id")})
-    private Set<Articals> articles = new HashSet<>(0);
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
+    private Set<Articals> articles = new HashSet<>();
+
 
     public Author() {
     }
