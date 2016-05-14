@@ -8,7 +8,13 @@
 </head>
 <body>
 <%@include file="WEB-INF/jspf/top_bar.jspf" %>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <%@include file="WEB-INF/list_news.jspf" %>
+        </div>
+    </div>
+</div>
 <%@include file="WEB-INF/jspf/css.jspf" %>
 </body>
 </html>

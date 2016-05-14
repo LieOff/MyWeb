@@ -33,7 +33,10 @@ public class Author {
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
     private Set<Articals> articles = new HashSet<>();
-
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
+    private Set<News> news = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
+    private Set<DocApp> docApps = new HashSet<>();
 
     public Author() {
     }
@@ -62,6 +65,23 @@ public class Author {
     public void setArticles(Set<Articals> articles) {
         this.articles = articles;
     }
+
+    public Set<DocApp> getDocApp() {
+        return this.docApps;
+    }
+
+    public void setDocApp(Set<DocApp> DocApps) {
+        this.docApps = DocApps;
+    }
+
+    public Set<News> getNews() {
+        return this.news;
+    }
+
+    public void setNews(Set<News> News) {
+        this.news = News;
+    }
+
 
     public int getId() {
         return id;

@@ -1,10 +1,13 @@
 package com.github.u1152.uportal.servlets;
 
 import com.github.u1152.uportal.dao.ArticalsDao;
+import com.github.u1152.uportal.dao.ArticalsPropDao;
 import com.github.u1152.uportal.dao.AuthorDao;
 import com.github.u1152.uportal.localdaoimpl.ArticalsDaoExampleImpl;
+import com.github.u1152.uportal.localdaoimpl.ArticalsPropDaoExampleImpl;
 import com.github.u1152.uportal.localdaoimpl.AuthorDaoExampleImpl;
 import com.github.u1152.uportal.model.Articals;
+import com.github.u1152.uportal.model.ArticalsProp;
 import com.github.u1152.uportal.model.Author;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +26,7 @@ import java.util.*;
 public class ArticalsServlet extends HttpServlet {
     private ArticalsDao articalsDao;
     private AuthorDao authorDao;
+    private ArticalsPropDao articalsPropDao;
     private static final String EDIT_ACTION = "edit";
     private static final String DELETE_ACTION = "delete";
     private static final String ADD_ACTION = "add";
@@ -33,6 +37,7 @@ public class ArticalsServlet extends HttpServlet {
     public ArticalsServlet() {
         articalsDao = new ArticalsDaoExampleImpl();
         authorDao = new AuthorDaoExampleImpl();
+        articalsPropDao = new ArticalsPropDaoExampleImpl();
     }
 
     @Override
@@ -42,6 +47,16 @@ public class ArticalsServlet extends HttpServlet {
         if (action != null) {
             if (action.equals(ADD_ACTION)) {
                 List<Author> authorList =authorDao.getAll();
+                List<ArticalsProp> articalsProps = articalsPropDao.getAllPopDesc();
+                List<ArticalsProp> articalsPropList = articalsPropDao.getAllValue("Вид публикации");
+                //int i=0;
+                //for (ArticalsProp element : articalsProps) {
+                    //System.out.println(element);
+                  //  req.setAttribute("AllDescsValue"+element.getId()+"-"+i,articalsPropDao.getAllValue(element.getDescription()));
+                   // i++;
+               // }
+                req.setAttribute("AllDescsValue",articalsPropList);
+                req.setAttribute("AllDescs",articalsProps);
                 req.setAttribute("authorsall", authorList);
                 RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                 view.forward(req, resp);
@@ -55,9 +70,16 @@ public class ArticalsServlet extends HttpServlet {
                     List<Author> authorList =authorDao.getAll();
                     List<Author> inauthor = new ArrayList<>(artical.getAuthors());
                     authorList.removeAll(inauthor);
+                    List<ArticalsProp> articalsProps = articalsPropDao.getAllPopDesc();
+                    List<ArticalsProp> propList = articalsPropDao.getAllValue("Вид публикации");
+                    List<ArticalsProp> inprop = new ArrayList<>(artical.getArticalsProps());
+                    propList.removeAll(inprop);
                     req.setAttribute("artical", artical);
                     req.setAttribute("authorsall", authorList);
                     req.setAttribute("authorsin", inauthor);
+                    req.setAttribute("AllDescsValue", propList);
+                    req.setAttribute("propin", inprop);
+                    req.setAttribute("AllDescs",articalsProps);
                     RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                     view.forward(req, resp);
                     break;
@@ -89,6 +111,17 @@ public class ArticalsServlet extends HttpServlet {
         if (!newAuthor.isEmpty()) {
             articals.setAuthors(newAuthor);
         }else {}
+
+        String idProp[] = request.getParameterValues("prop1");
+        Set<ArticalsProp> articalsPropHashSet = new HashSet<>();
+        for(String s: idProp) {
+            articalsPropHashSet.add(articalsPropDao.getById(Integer.valueOf(s)));
+        }
+        if (!articalsPropHashSet.isEmpty()) {
+            articals.setArticalsProps(articalsPropHashSet);
+        }else {}
+
+
         String stringId = request.getParameter("id");
         if (stringId == null || stringId.isEmpty()) {
             articalsDao.add(articals);

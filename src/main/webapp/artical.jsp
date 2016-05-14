@@ -75,6 +75,23 @@
                                                  </select>
                                             </div>
                                     </div>
+                                    <c:forEach items="${AllDescs}" var="alldesc">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label"><c:out value="${alldesc.description}"/></label>
+                                            <div class="col-md-9">
+                                                <select data-placeholder="<c:out value="${alldesc.description}"/>" id="prop<c:out value="${alldesc.id}"/>" name="prop<c:out value="${alldesc.id}"/>" class="chosen-select" tabindex="4">
+                                                    <option value=""></option>
+                                                    <c:forEach items="${propin}" var="propins">
+                                                        <option value="<c:out value="${propins.id}"/>" selected><c:out value="${propins.valueOf}"/></option>
+                                                    </c:forEach>
+                                                    <c:forEach items="${AllDescsValue}" var="DescValue">
+                                                        <option value="<c:out value="${DescValue.id}"/>"><c:out value="${DescValue.valueOf}"/></option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+
 
                                     <input id="id" name="id" type="hidden" value="<c:out value="${artical.id}"/>">
                                     <!-- Button -->

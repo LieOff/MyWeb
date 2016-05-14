@@ -31,6 +31,13 @@ public class Articals {
             inverseJoinColumns = {@JoinColumn(name = "IDAuthor", referencedColumnName = "id")})
     private Set<Author> authors = new HashSet<>(0);
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "articles_articalprop",
+            joinColumns = {@JoinColumn(name = "IDArt",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "IDArtProp", referencedColumnName = "id")})
+    private Set<ArticalsProp> articalsProps = new HashSet<>(0);
+
+
     public Articals() {
     }
 
@@ -71,6 +78,14 @@ public class Articals {
 
     public void setDateCreate(String DateCreate) {
         this.dateCreate = DateCreate;
+    }
+
+    public Set<ArticalsProp> getArticalsProps() {
+        return articalsProps;
+    }
+
+    public void setArticalsProps(Set<ArticalsProp> articalsProp) {
+        this.articalsProps = articalsProp;
     }
 
     public Set<Author> getAuthors() {

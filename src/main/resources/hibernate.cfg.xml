@@ -21,6 +21,9 @@
         <property name="current_session_context_class">thread</property>
 
         <mapping class="com.github.u1152.uportal.model.Author" />
+        <mapping class="com.github.u1152.uportal.model.News" />
+        <mapping class="com.github.u1152.uportal.model.DocApp" />
         <mapping class="com.github.u1152.uportal.model.Articals"/>
+        <mapping class="com.github.u1152.uportal.model.ArticalsProp" />
     </session-factory>
 </hibernate-configuration>
