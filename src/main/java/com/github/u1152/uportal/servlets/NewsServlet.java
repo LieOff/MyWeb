@@ -20,10 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Илья on 20.04.2016.
@@ -53,16 +52,6 @@ public class NewsServlet extends HttpServlet {
         if (action != null) {
             if (action.equals(ADD_ACTION)) {
                 List<Author> authorList =authorDao.getAll();
-                //List<ArticalsProp> articalsProps = articalsPropDao.getAllPopDesc();
-                //List<ArticalsProp> articalsPropList = articalsPropDao.getAllValue("Вид публикации");
-                //int i=0;
-                //for (ArticalsProp element : articalsProps) {
-                    //System.out.println(element);
-                  //  req.setAttribute("AllDescsValue"+element.getId()+"-"+i,articalsPropDao.getAllValue(element.getDescription()));
-                   // i++;
-               // }
-                //req.setAttribute("AllDescsValue",articalsPropList);
-                //req.setAttribute("AllDescs",articalsProps);
                 req.setAttribute("authorsall", authorList);
                 RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                 view.forward(req, resp);
@@ -100,6 +89,30 @@ public class NewsServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        News news = new News();
+        //news.setDateCreate(\);
+        news.setHeader(request.getParameter("description"));
+        news.setText(request.getParameter("body"));
+        //articals.setDateCreate(request.getParameter("dateCreate"));
+        String arrayidauthor[] = request.getParameterValues("authors");
+        Set<Author> newAuthor = new HashSet<>();
+
+        String stringId = request.getParameter("id");
+        if (stringId == null || stringId.isEmpty()) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            news.setDateCreate(dateFormat.format(date));
+            newsDao.add(news);
+        } else {
+            news.setId(Integer.valueOf(stringId));
+            newsDao.update(news);
+        }
+        doGet(request, resp);
+    }
 
 
 

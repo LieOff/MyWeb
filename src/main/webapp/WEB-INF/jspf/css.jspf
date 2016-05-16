@@ -14,4 +14,6 @@
       padding-top: 0;
     }
   }
+#editor {overflow:scroll; max-height:300px}
+
 </style>

@@ -49,12 +49,6 @@ public class ArticalsServlet extends HttpServlet {
                 List<Author> authorList =authorDao.getAll();
                 List<ArticalsProp> articalsProps = articalsPropDao.getAllPopDesc();
                 List<ArticalsProp> articalsPropList = articalsPropDao.getAllValue("Вид публикации");
-                //int i=0;
-                //for (ArticalsProp element : articalsProps) {
-                    //System.out.println(element);
-                  //  req.setAttribute("AllDescsValue"+element.getId()+"-"+i,articalsPropDao.getAllValue(element.getDescription()));
-                   // i++;
-               // }
                 req.setAttribute("AllDescsValue",articalsPropList);
                 req.setAttribute("AllDescs",articalsProps);
                 req.setAttribute("authorsall", authorList);

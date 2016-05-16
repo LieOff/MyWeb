@@ -1,0 +1,42 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<c:forEach items="${news}" var="news">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                  <h4><c:out value="${news.header}" />
+                  </h4>
+                </div>
+                <div class="col-md-2 text-right">
+                    <a class="btn btn-default" href="articals?action=edit&id=<c:out value="${news.id}"/>">
+                        <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default" href="articals?action=delete&id=<c:out value="${news.id}"/>">
+                        <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div class="col-md-8">
+                    автор:
+                    <c:forEach items="${news.authors}" var="authors">
+                    <a href="authors?action=edit&id=<c:out value="${authors.id}"/>">
+                        <c:out value="${authors.lastName}"/>
+                    </a>
+                    </c:forEach>
+                 </div>
+            </div>
+        </div>
+    </div>
+</c:forEach>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a class="btn btn-success" href="news?action=add">
+                    Добавить новость
+                    </a>
+                </div>
+            </div>
+                    </div>
