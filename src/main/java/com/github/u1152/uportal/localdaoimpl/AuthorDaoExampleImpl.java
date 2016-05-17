@@ -36,6 +36,7 @@ public class AuthorDaoExampleImpl implements AuthorDao{
 
     public void delete(Author author) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         session.delete(author);
         session.flush();
         session.getTransaction().commit();

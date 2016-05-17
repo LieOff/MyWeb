@@ -51,17 +51,20 @@ public class NewsServlet extends HttpServlet {
 
         if (action != null) {
             if (action.equals(ADD_ACTION)) {
-                List<Author> authorList =authorDao.getAll();
-                req.setAttribute("authorsall", authorList);
+                //List<Author> authorList =authorDao.getAll();
+                //req.setAttribute("authorsall", authorList);
                 RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                 view.forward(req, resp);
                 return;
             }
 
             String id = req.getParameter("id");
+
             News news = newsDao.getById(Integer.valueOf(id));
             switch (action) {
                 case EDIT_ACTION:
+
+                    //List<Author> authorList =authorDao.getAll();
                    // List<Author> authorList =authorDao.getAll();
                    // List<Author> inauthor = new ArrayList<>(artical.getAuthors());
                    // authorList.removeAll(inauthor);
@@ -74,10 +77,12 @@ public class NewsServlet extends HttpServlet {
                     //req.setAttribute("authorsin", inauthor);
                     //req.setAttribute("AllDescsValue", propList);
                     //req.setAttribute("propin", inprop);
-                    //req.setAttribute("AllDescs",articalsProps);
+                    req.setAttribute("news",news);
+                    //req.setAttribute("authorsall", authorList);
                     RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                     view.forward(req, resp);
-                    break;
+                    return;
+
                 case DELETE_ACTION:
                     newsDao.delete(news);
                     break;
@@ -93,22 +98,25 @@ public class NewsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        News news = new News();
-        //news.setDateCreate(\);
-        news.setHeader(request.getParameter("description"));
-        news.setText(request.getParameter("body"));
-        //articals.setDateCreate(request.getParameter("dateCreate"));
-        String arrayidauthor[] = request.getParameterValues("authors");
-        Set<Author> newAuthor = new HashSet<>();
+
+
 
         String stringId = request.getParameter("id");
         if (stringId == null || stringId.isEmpty()) {
+            News news = new News();
+            //news.setDateCreate(\);
+            news.setHeader(request.getParameter("description"));
+            news.setText(request.getParameter("body"));
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             news.setDateCreate(dateFormat.format(date));
             newsDao.add(news);
         } else {
-            news.setId(Integer.valueOf(stringId));
+            News news = newsDao.getById(Integer.valueOf(stringId));
+            //news.setDateCreate(\);
+            news.setHeader(request.getParameter("description"));
+            news.setText(request.getParameter("body"));
+            //news.setId(Integer.valueOf(stringId));
             newsDao.update(news);
         }
         doGet(request, resp);

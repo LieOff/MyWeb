@@ -25,6 +25,7 @@ public class ArticalsPropDaoExampleImpl implements ArticalsPropDao {
 
     public void delete(ArticalsProp articalsProp) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         session.delete(articalsProp);
         session.flush();
         session.getTransaction().commit();

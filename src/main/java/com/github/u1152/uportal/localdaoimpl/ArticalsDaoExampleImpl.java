@@ -25,6 +25,7 @@ public class ArticalsDaoExampleImpl implements ArticalsDao {
 
     public void delete(Articals articals) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         session.delete(articals);
         session.flush();
         session.getTransaction().commit();

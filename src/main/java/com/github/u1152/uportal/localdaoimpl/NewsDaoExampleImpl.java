@@ -27,6 +27,7 @@ public class NewsDaoExampleImpl implements NewsDao {
 
     public void delete(News news) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         session.delete(news);
         session.flush();
         session.getTransaction().commit();
@@ -50,11 +51,13 @@ public class NewsDaoExampleImpl implements NewsDao {
     public News getById(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query q = session.createQuery("from News A where A.id= :news_id");
+        System.out.print("Начали");
+        Query q = session.createQuery("from News where id= :news_id");
         q.setParameter("news_id",id);
-        List<News> Aut = q.list();
+        List<News> newses = q.list();
+        System.out.print("Получили");
         session.getTransaction().commit();
-        return Aut.get(0);
+        return newses.get(0);
     }
 
 }

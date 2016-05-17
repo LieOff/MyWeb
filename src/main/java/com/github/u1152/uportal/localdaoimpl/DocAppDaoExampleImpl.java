@@ -27,6 +27,7 @@ public class DocAppDaoExampleImpl implements DocAppDao {
 
     public void delete(DocApp docApp) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         session.delete(docApp);
         session.flush();
         session.getTransaction().commit();

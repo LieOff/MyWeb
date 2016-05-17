@@ -97,7 +97,7 @@
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="col-md-6 control-label" for="description">Названия</label>
-                                    <div class="col-md-12">
+                                    <div class="col-md-10">
                                         <input id="description"
                                                name="description"
                                                type="text"
@@ -106,63 +106,62 @@
                                                value="<c:out value="${news.header}"/>">
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-
+                                <div class="col-md-12">
+                                    <label class="col-md-12 control-label">Текст</label>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label" for="textNews">Текст</label>
                                         <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
                                             <div class="btn-group">
-                                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
-                                                <ul class="dropdown-menu">
-                                                </ul>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                                                    <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                                                    <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-                                                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-                                                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-                                                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
-                                                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
-                                                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
-                                                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-                                                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-                                                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-                                                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
-                                            </div>
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+                                                    <ul class="dropdown-menu">
+                                                    </ul>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                                                        <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                                                        <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+                                                    <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+                                                    <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+                                                    <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+                                                    <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+                                                    <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+                                                    <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+                                                    <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+                                                    <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+                                                    <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+                                                </div>
 
-                                            <div class="btn-group">
-                                                <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
-                                                <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                                <div class="btn-group">
+                                                    <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+                                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+                                                    <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+                                                </div>
+                                                <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
                                             </div>
-                                            <div class="btn-group">
-                                                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
-                                                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
-                                            </div>
-                                            <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
-                                        </div>
-
-                                        <div id="editor" contenteditable="true">
-
                                         </div>
                                     </div>
                                 </div>
+                                <div id="editor" contenteditable="true">
 
+                                </div>
                                     <input id="id" name="id" type="hidden" value="<c:out value="${news.id}"/>">
                                     <!-- Button -->
-                                <textarea style="display: none;" id="editorCopy" name="body"></textarea>
+                                <textarea style="display: none;" id="editorCopy" name="body"><c:out value="${news.text}"/></textarea>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for=""></label>
                                         <div class="col-md-9">
