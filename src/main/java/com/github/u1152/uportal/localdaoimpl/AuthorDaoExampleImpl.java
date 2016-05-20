@@ -68,4 +68,14 @@ public class AuthorDaoExampleImpl implements AuthorDao{
         session.getTransaction().commit();
         return Aut.get(0);
     }
+    public List<Author> getByLogin(String login){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Query q = session.createQuery("from Author A where A.login= :login");
+        q.setParameter("login",login);
+        List<Author> Aut = q.list();
+        session.getTransaction().commit();
+
+        return Aut;
+    }
 }

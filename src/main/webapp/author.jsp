@@ -1,12 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<script type="text/javascript" src="http://yandex.st/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <html>
 <head>
     <title>UPortal</title>
     <%@include file="WEB-INF/jspf/css.jspf" %>
 </head>
 <body>
+<style>
+
+    /** Styling input[type=file] **/
+    .btn-file { width: 50 px; position: relative; overflow: hidden; margin-right: 4px; }
+    .btn-file input { width: 50 px; position: absolute; top: 0; right: 0; margin: 0; opacity: 0; filter: alpha(opacity=0);
+        transform: translate(-300px, 0) scale(4); font-size: 23px; direction: ltr; cursor: pointer; }
+    /* Fix for IE 7: */
+    * + html .btn-file { width: 50 px; padding: 2px 15px; margin: 1px 0 0 0; }
+</style>
+<script type="text/javascript">
+    (function ($){
+        $(function (){
+            $('.btn-file').each(function (){
+                var self = this;
+                $('input[type=file]', this).change(function (){
+                    // remove existing file info
+                    $(self).next().remove();
+                    // get value
+                    var value = $(this).val();
+                    // get file name
+                    var fileName = value.substring(value.lastIndexOf('/')+1);
+                    // get file extension
+                    var fileExt = fileName.split('.').pop().toLowerCase();
+                    // append file info
+                    $('<span><i class="icon-file icon-' + fileExt + '"></i> ' + fileName + '</span>').insertAfter(self);
+                });
+            });
+        });
+    })(jQuery);
+</script>
 <%@include file="WEB-INF/jspf/top_bar.jspf" %>
 <div class="container">
     <div class="row">
@@ -20,11 +52,16 @@
                             <img alt="placeholder"
                                  src="<c:out value="${author.image}"/>"
                             data-holder-rendered="true" style="height: 220px; width:220px   ; display: block;">
-                        <span class="btn btn-default btn-file">
-                            Browse <input type="file">
-                        </span>
                         </div>
+                        <form class="form-horizontal" action="authors" method="post" enctype="multipart/form-data">
                         <div class="col-md-4">
+                            <label class="control-label">Picture:</label>
+                            <div class="controls clearfix">
+                                <span class="btn btn-success btn-file">
+                                    <i class="icon-plus"></i> <span>Choose picture...</span>
+                                    <input type="file" name="file" id="file" />
+                                </span>
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <legend>
@@ -32,7 +69,7 @@
                                 <c:out value="${author.firstName}"/>
                                 <c:out value="${author.midName}"/>
                             </legend>
-                            <form class="form-horizontal" action="authors" method="post">
+
                                 <fieldset>
                                     <!-- Text input-->
                                     <div class="form-group">

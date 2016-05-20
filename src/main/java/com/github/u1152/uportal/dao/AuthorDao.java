@@ -18,4 +18,6 @@ public interface AuthorDao {
     List<Author> getAll();
 
     Author getById(int id);
+
+    List<Author> getByLogin(String login);
 }

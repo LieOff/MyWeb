@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
 <nav class="navbar navbar-default navbar-inverse">
     <div class="container">
         <div class="navbar-header">
@@ -19,8 +22,61 @@
                 <li><a href="news">Новости</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Войти</a></li>
+                <c:if test="${AutIN}">
+                    <a href="authors?action=edit&id=<c:out value="${userin.id}"/>"><img src="<c:out value="${userin.image}"/>" style="height:50px" class="img-responsive img-circle"></a>
+                </c:if>
+                <c:if test="${!AutIN}">
+                    <li><a href="#" name="postSubmit" id="postSubmit">Войти</a></li>
+                </c:if>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img class="img-circle" id="img_logo" src="img/logo.png">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+
+            <div id="div-forms">
+                <form id="login-form" action="autific">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Введите логин и пароль</span>
+                        </div>
+                        <input id="login_username" name="login_username" class="form-control" type="text" placeholder="Логин" required>
+                        <input id="login_password" name="login_password" class="form-control" type="password" placeholder="Пароль" required>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> запомнить меня
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('document').ready(function(){
+        $('#postSubmit').click(function () {
+            $('#login-modal').modal();
+        });
+
+    });
+
+</script>

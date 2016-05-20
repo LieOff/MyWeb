@@ -35,9 +35,11 @@ public class NewsServlet extends HttpServlet {
     private static final String EDIT_ACTION = "edit";
     private static final String DELETE_ACTION = "delete";
     private static final String ADD_ACTION = "add";
+    private static final String VIEW_ACTION = "view";
     private static final String ACTION = "action";
     private static final String AUTHORS = "/news.jsp";
     private static final String ARTICAL = "/newso.jsp";
+    private static final String NewsView = "/newsview.jsp";
 
     public NewsServlet() {
         //articalsDao = new ArticalsDaoExampleImpl();
@@ -82,7 +84,11 @@ public class NewsServlet extends HttpServlet {
                     RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
                     view.forward(req, resp);
                     return;
-
+                case VIEW_ACTION:
+                    req.setAttribute("news",news);
+                    RequestDispatcher views = req.getRequestDispatcher(NewsView);
+                    views.forward(req, resp);
+                    return;
                 case DELETE_ACTION:
                     newsDao.delete(news);
                     break;

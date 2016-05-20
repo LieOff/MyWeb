@@ -31,6 +31,12 @@ public class Author {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "pass")
+    private String password;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
     private Set<Articals> articles = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors")
@@ -89,6 +95,22 @@ public class Author {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String Login) {
+        this.login = Login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String Password) {
+        this.password = Password;
     }
 
     public String getFirstName() {

@@ -50,6 +50,8 @@
       <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="SurName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="Patronymic" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="login" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="pass" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="author_docregapp" schema="" catalog="sapr" type="TABLE">
@@ -57,12 +59,20 @@
       <column name="IDAut" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="IDDApp" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FK4514AE915927E84D" columns="IDDApp" ref-table="docregapp" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK4514AE91A17FD4FC" columns="IDAut" ref-table="author" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK4514AE915927E84D" unique="false" columns="IDDApp"/>
+      <index name="FK4514AE91A17FD4FC" unique="false" columns="IDAut"/>
     </table>
     <table name="author_news" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="IDAut" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="IDNews" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FK2A7F610760D37ED" columns="IDNews" ref-table="news" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK2A7F6107A17FD4FC" columns="IDAut" ref-table="author" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK2A7F610760D37ED" unique="false" columns="IDNews"/>
+      <index name="FK2A7F6107A17FD4FC" unique="false" columns="IDAut"/>
     </table>
     <table name="docregapp" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -74,10 +84,10 @@
     </table>
     <table name="news" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="Image" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Image" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="DateAdd" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" def="Jyc="/>
       <column name="Header" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <column name="TextNews" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="TextNews" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
   </data-source>
