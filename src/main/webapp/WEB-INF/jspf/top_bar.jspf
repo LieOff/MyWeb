@@ -53,11 +53,6 @@
                         </div>
                         <input id="login_username" name="login_username" class="form-control" type="text" placeholder="Логин" required>
                         <input id="login_password" name="login_password" class="form-control" type="password" placeholder="Пароль" required>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> запомнить меня
-                            </label>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <div>

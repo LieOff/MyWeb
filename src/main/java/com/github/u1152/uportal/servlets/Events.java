@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
@@ -34,7 +35,13 @@ public class Events extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        HttpSession session = req.getSession();
+        req.setAttribute("authors", authorDao.getAll());
+        if (session.getAttribute("userInfo") != null) {
+            Author AutIn = authorDao.getById((Integer) session.getAttribute("userInfo"));
+            req.setAttribute("AutIN",true);
+            req.setAttribute("userin", AutIn);
+        }else{req.setAttribute("AutIN",false);}
         RequestDispatcher view = req.getRequestDispatcher(AUTHORS);
         view.forward(req, resp);
 

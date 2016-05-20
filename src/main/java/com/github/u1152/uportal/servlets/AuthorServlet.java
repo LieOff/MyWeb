@@ -39,6 +39,12 @@ public class AuthorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter(ACTION);
         HttpSession session = req.getSession();
+        req.setAttribute("authors", authorDao.getAll());
+        if (session.getAttribute("userInfo") != null) {
+            Author AutIn = authorDao.getById((Integer) session.getAttribute("userInfo"));
+            req.setAttribute("AutIN",true);
+            req.setAttribute("userin", AutIn);
+        }else{req.setAttribute("AutIN",false);}
         if (action != null) {
             if (action.equals(ADD_ACTION)) {
                 RequestDispatcher view = req.getRequestDispatcher(AUTHOR);
@@ -59,12 +65,6 @@ public class AuthorServlet extends HttpServlet {
                     break;
             }
         }
-        req.setAttribute("authors", authorDao.getAll());
-        if (session.getAttribute("userInfo") != null) {
-            Author AutIn = authorDao.getById((Integer) session.getAttribute("userInfo"));
-            req.setAttribute("AutIN",true);
-            req.setAttribute("userin", AutIn);
-        }else{req.setAttribute("AutIN",false);}
         RequestDispatcher view = req.getRequestDispatcher(AUTHORS);
         view.forward(req, resp);
 
