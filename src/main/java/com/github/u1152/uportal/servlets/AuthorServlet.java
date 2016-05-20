@@ -13,6 +13,7 @@ import javax.servlet.http.*;
 import javax.validation.constraints.Null;
 import java.io.*;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * author Aleksandr
@@ -105,6 +106,14 @@ public class AuthorServlet extends HttpServlet {
              author.setPassword(oldauhor.getPassword());
              for (Part part : request.getParts()) {
                  fileName = extractFileName(part);
+                 UUID uuid = UUID.randomUUID();
+                 String extension = "";
+
+                 int i = fileName.lastIndexOf('.');
+                 if (i > 0) {
+                     extension = fileName.substring(i+1);
+                 }
+                 fileName = ""+uuid+"."+extension;
                  System.out.print(oldauhor.getImage());
                  System.out.print(fileName);
 
