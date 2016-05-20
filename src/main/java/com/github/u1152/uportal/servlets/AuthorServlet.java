@@ -72,10 +72,11 @@ public class AuthorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-        String stringId = request.getParameter("id");
+
 
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        String stringId = request.getParameter("id");
         Author author = new Author();
         String appPath = request.getServletContext().getRealPath("");
         String savePath = appPath + SAVE_DIR;
