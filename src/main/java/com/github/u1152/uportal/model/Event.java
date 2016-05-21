@@ -17,13 +17,13 @@ public class Event {
     private int id;
 
     @Column(name = "Name")
-    private String name;
+    private String title;
 
     @Column(name = "DateStart", columnDefinition="DATETIME")
-    private Date dateStart;
+    private Date start;
 
     @Column(name = "DateEnd", columnDefinition="DATETIME")
-    private Date dateEnd;
+    private Date end;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "author_news",
@@ -34,11 +34,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(int ID, String Header, Date DateStart, Date Image) {
+    public Event(int ID, String Header, Date Start, Date Image) {
         this.id = ID;
-        this.name = Header;
-        this.dateStart = DateStart;
-        this.dateEnd = Image;
+        this.title = Header;
+        this.start = Start;
+        this.end = Image;
     }
     public Set<Author> getAuthors() {
         return authors;
@@ -57,28 +57,28 @@ public class Event {
     }
 
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String Header) {
-        this.name = Header;
+    public void setTitle(String Header) {
+        this.title = Header;
     }
 
-    public Date getDateStart() {
-        return dateStart;
+    public Date getStart() {
+        return start;
     }
 
-    public void setDateStart(Date DateCreate) {
-        this.dateStart = DateCreate;
+    public void setStart(Date DateCreate) {
+        this.start = DateCreate;
     }
 
-    public Date getDateEnd() {
-        return dateEnd;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setDateEnd(Date DateEnd) {
-        this.dateEnd = DateEnd;
+    public void setEnd(Date DateEnd) {
+        this.end = DateEnd;
     }
 
 
@@ -96,8 +96,8 @@ public class Event {
     @Override
     public int hashCode() {
         int result = getId();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + getDateStart().hashCode();
+        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
+        result = 31 * result + getStart().hashCode();
         return result;
     }
 

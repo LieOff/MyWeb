@@ -1,10 +1,12 @@
 package com.github.u1152.uportal.servlets;
 
 import com.github.u1152.uportal.dao.AuthorDao;
+import com.github.u1152.uportal.dao.EventDao;
 import com.github.u1152.uportal.localdaoimpl.AuthorDaoExampleImpl;
-import com.github.u1152.uportal.model.Articals;
+import com.github.u1152.uportal.localdaoimpl.EventDaoExampleImpl;
 import com.github.u1152.uportal.model.Author;
 import com.github.u1152.uportal.model.Event;
+import com.google.gson.Gson;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Set;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * author Aleksandr
@@ -29,15 +37,17 @@ public class Events extends HttpServlet {
     private static final String AUTHOR = "/event.jsp";
 
     private AuthorDao authorDao;
+    private EventDao eventDao;
 
     public Events() {
         authorDao = new AuthorDaoExampleImpl();
+        eventDao = new EventDaoExampleImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        req.setAttribute("authors", authorDao.getAll());
+        req.setAttribute("event", authorDao.getAll());
         if (session.getAttribute("userInfo") != null) {
             Author AutIn = authorDao.getById((Integer) session.getAttribute("userInfo"));
             req.setAttribute("AutIN",true);
@@ -51,10 +61,25 @@ public class Events extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         Event event = new Event();
-        //event.setDateStart();
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String stringId = request.getParameter("id");
+        try {
+            Date dateStart = format.parse(request.getParameter("start_date"));
+            Date dateEnd = format.parse(request.getParameter("end_date"));
+            event.setStart(dateStart);
+            event.setEnd(dateEnd);
+            System.out.print("WEHERE");
+            System.out.print(dateStart);
+            event.setTitle(request.getParameter("nameEvent"));
+            eventDao.add(event);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         //event.getDateEnd(request.getParameter("lastName"));
         //event.setName(request.getParameter("midName"));
         //String stringId = request.getParameter("id");
@@ -67,6 +92,6 @@ public class Events extends HttpServlet {
          //   author.setArticles(OldArt);
          //   authorDao.update(author);
         //}
-        //doGet(request, resp);
+        doGet(request, resp);
     }
 }

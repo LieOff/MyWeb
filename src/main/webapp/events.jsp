@@ -51,7 +51,7 @@
             </div>
 
             <div id="div-forms">
-                <form id="login-form" action="events">
+                <form id="login-form" action="events" method="post">
                     <div class="modal-body">
                         <div id="div-login-msg">
                             <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
@@ -77,17 +77,19 @@
     $(document).ready(function() {
 
         $('#bootstrapModalFullCalendar').fullCalendar({
+            nextDayThreshold: '00:00:00',
             header: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
+            timezone:'local',
             monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
             dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
             dayNamesShort: ["ВС","ПН","ВТ","СР","ЧТ","ПТ","СБ"],
             dayClick: function(date, allDay, jsEvent, view) {
-                var newDate = moment(date).format("DD/MM/YYYY HH:MM");
+                var newDate = moment(date).format("DD/MM/YYYY HH:MM:SS");
                 document.getElementById('start_date').setAttribute('value',newDate);
                 document.getElementById('end_date').setAttribute('value',newDate);
                 //alert(newDate);
@@ -99,21 +101,10 @@
                 $('#fullCalModal').modal();
                 return false;
             },
-            events:
-                    [
-                        {
-                            "title":"CSS Meetup",
-                            "allday":"false",
-                            "description":"<p>This is just a fake description for the CSS Meetup.</p><p>Nothing to see!</p>",
-                            "start":moment("2016-12-11 09:11:25"),
-                            "end":moment("2016-12-11"),
-                            "url":"http://www.mikesmithdev.com/blog/migrating-from-asp-net-to-ghost-node-js/"
-                        }
-                    ]
+            events: "events/CalendarJsonServlet"
         });
     });
 </script>
 
-<%@include file="WEB-INF/jspf/css.jspf" %>
 </body>
 </html>
