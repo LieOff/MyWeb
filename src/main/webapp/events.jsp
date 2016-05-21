@@ -40,43 +40,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="bootstrap/js/lang-all.js"></script>
 
-<div class="modal fade" id="modalev" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" align="center">
-                <img class="img-circle" id="img_logo" src="img/logo.png">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-            </div>
-
-
-            <div id="div-forms">
-                <form id="login-form" action="events">
-                    <div class="modal-body">
-                        <div id="div-login-msg">
-                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                            <span id="text-login-msg">Введите логин и пароль</span>
-                        </div>
-                        <input id="start_date" name="start_date">
-                        <br>
-                        <input id="end_date" name="end_date">
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     $(document).ready(function() {
-
         $('#bootstrapModalFullCalendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -87,13 +53,6 @@
             monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
             dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
             dayNamesShort: ["ВС","ПН","ВТ","СР","ЧТ","ПТ","СБ"],
-            dayClick: function(date, allDay, jsEvent, view) {
-                var newDate = moment(date).format("DD/MM/YYYY HH:MM");
-                document.getElementById('start_date').setAttribute('value',newDate);
-                document.getElementById('end_date').setAttribute('value',newDate);
-                //alert(newDate);
-                $('#modalev').modal();
-            },
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.description);
