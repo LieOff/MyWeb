@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="MySQL - sapr@localhost" uuid="b4229a1b-7e7c-4bea-8a95-f79ce69b56ce">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="MySQL" version="5.0.19-nt" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="sapr"/>
+    <table name="articalprop" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="ValueOf" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Usege" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="articles" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="TextArticals" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="DateCreate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="articles_articalprop" schema="" catalog="sapr" type="TABLE">
+      <column name="IDArt" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="IDArtProp" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FKE0AA1809458A21DF" columns="IDArt" ref-table="articles" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKE0AA18094E32D545" columns="IDArtProp" ref-table="articalprop" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="articles_articalprop_ID_uindex" unique="true" columns="ID"/>
+      <index name="FKE0AA1809458A21DF" unique="false" columns="IDArt"/>
+      <index name="FKE0AA18094E32D545" unique="false" columns="IDArtProp"/>
+    </table>
+    <table name="articles_author" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="IDAuthor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IDArt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FKF653BDCD458A21DF" columns="IDArt" ref-table="articles" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKF653BDCD8D00EF9D" columns="IDAuthor" ref-table="author" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKF653BDCD458A21DA" unique="false" columns="IDAuthor"/>
+      <index name="FKF653BDCD458A21DF" unique="false" columns="IDArt"/>
+      <index name="FKF653BDCD8D00EF9D" unique="false" columns="IDAuthor"/>
+    </table>
+    <table name="author" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="eMail" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FirstName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SurName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Patronymic" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="login" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="pass" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="author_docregapp" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="IDAut" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IDDApp" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FK4514AE915927E84D" columns="IDDApp" ref-table="docregapp" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK4514AE91A17FD4FC" columns="IDAut" ref-table="author" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK4514AE915927E84D" unique="false" columns="IDDApp"/>
+      <index name="FK4514AE91A17FD4FC" unique="false" columns="IDAut"/>
+    </table>
+    <table name="author_news" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="IDAut" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IDNews" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FK2A7F610760D37ED" columns="IDNews" ref-table="news" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK2A7F6107A17FD4FC" columns="IDAut" ref-table="author" ref-schema="" ref-catalog="sapr" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK2A7F610760D37ED" unique="false" columns="IDNews"/>
+      <index name="FK2A7F6107A17FD4FC" unique="false" columns="IDAut"/>
+    </table>
+    <table name="docregapp" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="RegDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" def="Jyc="/>
+      <column name="OtprDocDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" def="Jyc="/>
+      <column name="Header" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="FileName" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="news" schema="" catalog="sapr" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Image" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="DateAdd" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" def="Jyc="/>
+      <column name="Header" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="TextNews" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
   </data-source>
 </component>
