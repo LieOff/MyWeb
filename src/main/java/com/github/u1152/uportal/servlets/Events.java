@@ -4,6 +4,7 @@ import com.github.u1152.uportal.dao.AuthorDao;
 import com.github.u1152.uportal.localdaoimpl.AuthorDaoExampleImpl;
 import com.github.u1152.uportal.model.Articals;
 import com.github.u1152.uportal.model.Author;
+import com.github.u1152.uportal.model.Event;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,21 +53,20 @@ public class Events extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        Author author = new Author();
-        author.setFirstName(request.getParameter("firstName"));
-        author.setLastName(request.getParameter("lastName"));
-        author.setMidName(request.getParameter("midName"));
-        author.seteMail(request.getParameter("eMail"));
-        String stringId = request.getParameter("id");
-         if (stringId == null || stringId.isEmpty()) {
-            authorDao.add(author);
-        } else {
-            Author oldauhor = authorDao.getById(Integer.valueOf(stringId));
-            Set<Articals> OldArt = oldauhor.getArticles();
-            author.setId(Integer.valueOf(stringId));
-            author.setArticles(OldArt);
-            authorDao.update(author);
-        }
-        doGet(request, resp);
+        Event event = new Event();
+        //event.setDateStart();
+        //event.getDateEnd(request.getParameter("lastName"));
+        //event.setName(request.getParameter("midName"));
+        //String stringId = request.getParameter("id");
+         //if (stringId == null || stringId.isEmpty()) {
+         //   authorDao.add(author);
+        //} else {
+         //   Author oldauhor = authorDao.getById(Integer.valueOf(stringId));
+         //   Set<Articals> OldArt = oldauhor.getArticles();
+         //   author.setId(Integer.valueOf(stringId));
+         //   author.setArticles(OldArt);
+         //   authorDao.update(author);
+        //}
+        //doGet(request, resp);
     }
 }

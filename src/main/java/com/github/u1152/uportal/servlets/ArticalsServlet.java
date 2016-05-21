@@ -72,7 +72,9 @@ public class ArticalsServlet extends HttpServlet {
                     List<Author> inauthor = new ArrayList<>(artical.getAuthors());
                     authorList.removeAll(inauthor);
                     List<ArticalsProp> articalsProps = articalsPropDao.getAllPopDesc();
+                    System.out.print("GetALLPopDesc");
                     List<ArticalsProp> propList = articalsPropDao.getAllValue("Вид публикации");
+                    System.out.print("getAllValue");
                     List<ArticalsProp> inprop = new ArrayList<>(artical.getArticalsProps());
                     propList.removeAll(inprop);
                     req.setAttribute("artical", artical);
@@ -82,8 +84,9 @@ public class ArticalsServlet extends HttpServlet {
                     req.setAttribute("propin", inprop);
                     req.setAttribute("AllDescs",articalsProps);
                     RequestDispatcher view = req.getRequestDispatcher(ARTICAL);
+                    System.out.print("PrintStr");
                     view.forward(req, resp);
-                    break;
+                    return;
                 case DELETE_ACTION:
                     articalsDao.delete(artical);
                     break;

@@ -44,12 +44,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" align="center">
-                <img class="img-circle" id="img_logo" src="img/logo.png">
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
             </div>
-
 
             <div id="div-forms">
                 <form id="login-form" action="events">
@@ -58,13 +57,13 @@
                             <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                             <span id="text-login-msg">Введите логин и пароль</span>
                         </div>
-                        <input id="start_date" name="start_date">
-                        <br>
-                        <input id="end_date" name="end_date">
+                        <input id="nameEvent" name="nameEvent"  class="form-control" placeholder = "Названия события">
+                        <input id="start_date" name="start_date"  class="form-control" placeholder = "Дата начала события">
+                        <input id="end_date" name="end_date"  class="form-control" placeholder = "Дата конца события">
                     </div>
                     <div class="modal-footer">
                         <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Сохранить</button>
                         </div>
 
                     </div>
