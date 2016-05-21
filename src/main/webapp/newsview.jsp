@@ -26,14 +26,9 @@
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="col-md-6 control-label" for="description">Названия</label>
+                                    <label class="col-md-6 control-label" for="">Названия</label>
                                     <div class="col-md-10">
-                                        <input id="description"
-                                               name="description"
-                                               type="text"
-                                               placeholder="Названия"
-                                               required class="form-control input-md"
-                                               value="<c:out value="${news.header}"/>">
+                                        <c:out value="${news.header}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -41,14 +36,6 @@
                                 </div>
                                     <input id="id" name="id" type="hidden" value="<c:out value="${news.id}"/>">
                                     <!-- Button -->
-
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for=""></label>
-                                        <div class="col-md-9">
-                                            <button type="submit" name="postSubmit" id="postSubmit" class="btn btn-primary">Сохранить</button>
-                                        </div>
-                                    </div>
-
                             </fieldset>
                         </form>
                     </div>

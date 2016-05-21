@@ -10,9 +10,16 @@
                   </h4>
                 </div>
                 <div class="col-md-3 text-right">
-                    <a class="btn btn-default" href="news?action=edit&id=<c:out value="${news.id}"/>">
-                        <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span>
-                    </a>
+                    <c:if test="${AutIN}">
+                        <c:forEach items="${news.authors}" var="author">
+                            <c:if test="${userin == author}">
+                                <a class="btn btn-default" href="news?action=edit&id=<c:out value="${news.id}"/>">
+                                    <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span>
+                                </a>
+                            </c:if>
+                        </c:forEach>
+
+                    </c:if>
                     <a class="btn btn-default" href="news?action=view&id=<c:out value="${news.id}"/>">
                         <span class="glyphicon glyphicon-eye-open text-info" aria-hidden="true"></span>
                     </a>
@@ -23,13 +30,17 @@
 
                 <div class="col-md-8">
                     автор:
-
+                        <c:forEach items="${news.authors}" var="author">
+                            <a href="authors?action=edit&id=<c:out value="${author.id}"/>">
+                            <c:out value="${author.lastName}"/>
+                            </a>
+                        </c:forEach>
                  </div>
             </div>
         </div>
     </div>
 </c:forEach>
-
+<c:if test="${AutIN}">
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-12 text-right">
@@ -38,4 +49,5 @@
                     </a>
                 </div>
             </div>
-                    </div>
+        </div>
+</c:if>

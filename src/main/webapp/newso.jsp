@@ -2,10 +2,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
-<link rel="shortcut icon" href="https://d1g6a398qq2djm.cloudfront.net/img/favicon.ico" >
+
 <link href="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="alternate">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
@@ -16,7 +17,7 @@
 <html>
 <head>
     <title>UPortal</title>
-    <%@include file="WEB-INF/jspf/css.jspf" %>
+
 </head>
 <body>
 
@@ -81,8 +82,79 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 
-<%@include file="WEB-INF/jspf/top_bar.jspf" %>
+<nav class="navbar navbar-default navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">UPortal</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="authors">Авторы</a></li>
+                <li><a href="articals" >Публикации</a></li>
+                <li><a href="events">События</a></li>
+                <li><a href="news">Новости</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <c:if test="${AutIN}">
+                    <a href="authors?action=edit&id=<c:out value="${userin.id}"/>"><img src="<c:out value="${userin.image}"/>" style="height:50px" class="img-responsive img-circle"></a>
+                </c:if>
+                <c:if test="${!AutIN}">
+                    <li><a href="#" name="getIN" id="getIN">Войти</a></li>
+                </c:if>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
 
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img class="img-circle" id="img_logo" src="img/logo.png">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+
+            <div id="div-forms">
+                <form id="login-form" action="autific">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Введите логин и пароль</span>
+                        </div>
+                        <input id="login_username" name="login_username" class="form-control" type="text" placeholder="Логин" required>
+                        <input id="login_password" name="login_password" class="form-control" type="password" placeholder="Пароль" required>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('document').ready(function(){
+        $('#getIN').click(function () {
+            $('#login-modal').modal();
+        });
+
+    });
+
+</script>
 
 <div class="container">
     <div class="row">

@@ -116,6 +116,8 @@ public class NewsServlet extends HttpServlet {
 
         String stringId = request.getParameter("id");
         if (stringId == null || stringId.isEmpty()) {
+            HttpSession session = request.getSession();
+            Author AutIn = authorDao.getById((Integer) session.getAttribute("userInfo"));
             News news = new News();
             //news.setDateCreate(\);
             news.setHeader(request.getParameter("description"));
@@ -123,6 +125,9 @@ public class NewsServlet extends HttpServlet {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             news.setDateCreate(dateFormat.format(date));
+            Set<Author> authorSet = new HashSet<>();
+            authorSet.add(AutIn);
+            news.setAuthors(authorSet);
             newsDao.add(news);
         } else {
             News news = newsDao.getById(Integer.valueOf(stringId));
