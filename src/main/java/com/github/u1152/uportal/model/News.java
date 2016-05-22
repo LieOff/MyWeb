@@ -1,6 +1,7 @@
 package com.github.u1152.uportal.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,8 +22,8 @@ public class News {
     @Column(name = "TextNews")
     private String text;
 
-    @Column(name = "DateAdd")
-    private String dateCreate;
+    @Column(name = "DateAdd", columnDefinition="DATE")
+    private Date dateCreate;
 
     @Column(name = "Image")
     private String image;
@@ -36,7 +37,7 @@ public class News {
     public News() {
     }
 
-    public News(int ID, String Header, String Text, String DateCreate, String Image) {
+    public News(int ID, String Header, String Text, Date DateCreate, String Image) {
         this.id = ID;
         this.header = Header;
         this.text = Text;
@@ -75,11 +76,11 @@ public class News {
         this.header = Header;
     }
 
-    public String getDateCreate() {
+    public Date getDateCreate() {
         return dateCreate;
     }
 
-    public void setDateCreate(String DateCreate) {
+    public void setDateCreate(Date DateCreate) {
         this.dateCreate = DateCreate;
     }
 

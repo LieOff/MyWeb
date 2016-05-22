@@ -61,12 +61,13 @@ public class Events extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-
+        System.out.print("INDOPOST");
         request.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         Event event = new Event();
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String stringId = request.getParameter("id");
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        String stringId = request.getParameter("eventid");
+
         try {
             Date dateStart = format.parse(request.getParameter("start_date"));
             Date dateEnd = format.parse(request.getParameter("end_date"));
@@ -75,8 +76,25 @@ public class Events extends HttpServlet {
             System.out.print("WEHERE");
             System.out.print(dateStart);
             event.setTitle(request.getParameter("nameEvent"));
-            eventDao.add(event);
+            if (stringId == null || stringId.isEmpty()) {
+                eventDao.add(event);
+            }else {
+                String act = request.getParameter("act");
+                if (act == null) {
+                    //no button has been selected
+                } else if (act.equals("delete")) {
+                    event.setId(Integer.valueOf(stringId));
+                    eventDao.delete(event);
+                } else if (act.equals("update")) {
+                    event.setId(Integer.valueOf(stringId));
+                    eventDao.update(event);
+                } else {
+                    //someone has altered the HTML and sent a different value!
+                }
+
+            }
         } catch (ParseException e) {
+            System.out.print("ErrorConvertData");
             e.printStackTrace();
         }
 

@@ -68,7 +68,7 @@ public class NewsServlet extends HttpServlet {
             }
 
             String id = req.getParameter("id");
-
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             News news = newsDao.getById(Integer.valueOf(id));
             switch (action) {
                 case EDIT_ACTION:
@@ -92,6 +92,7 @@ public class NewsServlet extends HttpServlet {
                     view.forward(req, resp);
                     return;
                 case VIEW_ACTION:
+                    req.setAttribute("DateCreate",format.format(news.getDateCreate()));
                     req.setAttribute("news",news);
                     RequestDispatcher views = req.getRequestDispatcher(NewsView);
                     views.forward(req, resp);
@@ -122,9 +123,9 @@ public class NewsServlet extends HttpServlet {
             //news.setDateCreate(\);
             news.setHeader(request.getParameter("description"));
             news.setText(request.getParameter("body"));
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
             Date date = new Date();
-            news.setDateCreate(dateFormat.format(date));
+            news.setDateCreate(date);
             Set<Author> authorSet = new HashSet<>();
             authorSet.add(AutIn);
             news.setAuthors(authorSet);

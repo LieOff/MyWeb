@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
+
 <html>
 <head>
     <title>UPortal</title>
@@ -15,33 +16,16 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-
-            <div class="panel panel-default">
-
-                <div class="panel-body">
-                    <div class="row">
-                        <form class="form-horizontal" action="news" method="post">
-                            <fieldset>
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-6 control-label" for="">Названия</label>
-                                    <div class="col-md-10">
-                                        <c:out value="${news.header}"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-10">
-                                <c:out value="${news.text}" escapeXml="false"/>
-                                </div>
-                                    <input id="id" name="id" type="hidden" value="<c:out value="${news.id}"/>">
-                                    <!-- Button -->
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="blog-header">
+        <h1 class="blog-title"><c:out value="${news.header}"/></h1>
+        <c:forEach items="${news.authors}" var="authors">
+        <p class="lead blog-description"><c:out value="${DateCreate}"/>,<a href="authors?action=edit&id=<c:out value="${authors.id}"/>"> <c:out value="${authors.lastName}"/></a></p>
+        </c:forEach>
+    </div>
+    <div class="blog-post">
+        <p>
+            <c:out value="${news.text}" escapeXml="false"/>
+        </p>
     </div>
 </div>
 </div>

@@ -25,12 +25,6 @@ public class Event {
     @Column(name = "DateEnd", columnDefinition="DATETIME")
     private Date end;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "author_news",
-            joinColumns = {@JoinColumn(name = "IDNews",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "IDAut", referencedColumnName = "id")})
-    private Set<Author> authors = new HashSet<>(0);
-
     public Event() {
     }
 
@@ -39,13 +33,6 @@ public class Event {
         this.title = Header;
         this.start = Start;
         this.end = Image;
-    }
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> art) {
-        this.authors = art;
     }
 
     public int getId() {
