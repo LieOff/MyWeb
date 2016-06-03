@@ -19,6 +19,7 @@
       <column name="TextArticals" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="DateCreate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="FileName" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="articles_articalprop" schema="" catalog="sapr" type="TABLE">
@@ -84,7 +85,7 @@
     </table>
     <table name="event" schema="" catalog="sapr" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="Name" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Name" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="DateStart" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Jyc="/>
       <column name="DateEnd" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Jyc="/>
       <primary-key name="PRIMARY" columns="ID"/>

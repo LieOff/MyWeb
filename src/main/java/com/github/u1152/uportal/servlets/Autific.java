@@ -35,24 +35,24 @@ public class Autific extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         //Integer IdAutIn = (Integer) session.getAttribute("userInfo");
-        String login = req.getParameter("login_username");
-        String password = req.getParameter("login_password");
-        List<Author> AutInList = authorDao.getByLogin(login);
-        System.out.print("получили");
-        System.out.print(AutInList);
-        System.out.print(login);
-        if (AutInList.size()>0) {
-            System.out.print("Зашли в цикл");
-            Author AutIn = AutInList.get(0);
-            System.out.print(AutIn.getPassword());
-            System.out.print(password);
-            if (AutIn.getPassword().equals(password)) {
-                System.out.print("в ифе");
-                session.setAttribute("userInfo", AutIn.getId());
-                System.out.print("установили");
+        String act = req.getParameter("act");
+        if (act.equals("out")){
+            session.removeAttribute("userInfo");
+        }else {
+            String login = req.getParameter("login_username");
+            String password = req.getParameter("login_password");
+            List<Author> AutInList = authorDao.getByLogin(login);
+
+            if (AutInList.size() > 0) {
+                Author AutIn = AutInList.get(0);
+                System.out.print(AutIn.getPassword());
+                System.out.print(password);
+                if (AutIn.getPassword().equals(password)) {
+                    session.setAttribute("userInfo", AutIn.getId());
+                }
             }
         }
         resp.sendRedirect(req.getContextPath() + AUTHORS);

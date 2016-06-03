@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UPortal</title>
     <%@include file="WEB-INF/jspf/css.jspf" %>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css" type="text/css" rel="stylesheet" />
@@ -20,27 +21,14 @@
         </div>
     </div>
 </div>
-<div id="fullCalModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 id="modalTitle" class="modal-title"></h4>
-            </div>
-            <div id="modalBody" class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" id="eventUrl" target="_blank">Event Page</a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="bootstrap/js/lang-all.js"></script>
 <script src="bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="bootstrap-checkbox/bootstrap-checkbox.js"></script>
 <div class="modal fade" id="modalev" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -56,19 +44,24 @@
                     <div class="modal-body">
                         <div id="div-login-msg">
                             <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                            <span id="text-login-msg">Введите названия события</span>
+                            <span id="text-login-msg"><b>Введите названия события и описания</b></span>
                         </div>
+                        Названия события:
                         <input id="nameEvent" name="nameEvent"  class="form-control" placeholder = "Названия события">
+                        Описания
+                        <textarea style="resize: vertical;" id="DescEvent" name="DescEvent"  class="form-control" placeholder = "Описания события"></textarea>
                         <div id="div-login-msg1">
                             <div id="icon-login-msg1" class="glyphicon glyphicon-chevron-right"></div>
-                            <span id="text-login-msg1">Введите дату начала и конца</span>
+                            <span id="text-login-msg1"><b>Введите дату начала и конца</b></span>
                         </div>
+                        Дата начала:
                         <div class='input-group date' id='datetimepicker2'>
                         <input id="start_date" name="start_date"  class="form-control" placeholder = "Дата начала события">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
+                        Дата конца:
                         <div class='input-group date' id='datetimepicker3'>
                             <input id="end_date" name="end_date"  class="form-control" placeholder = "Дата конца события">
                             <span class="input-group-addon">
@@ -76,7 +69,9 @@
                             </span>
                         </div>
                         <input id="eventid" name="eventid" type="hidden">
-
+                        <br>
+                        Весь день:
+                        <input type="checkbox">
                     </div>
                     <div class="modal-footer">
                         <div>
@@ -93,13 +88,35 @@
 <script>
 
     $(document).ready(function() {
-        $('#datetimepicker3').datetimepicker({
-            dateFormat:'dd.mm.yyyy'
-        }),
+        $(':checkbox').checkboxpicker(),
+        $('#datetimepicker3').datetimepicker({}),
+                jQuery(function ($) {
+                    $.datetimepicker3.regional['my'] = {
+                        closeText: 'Закрыть',
+                        prevText: '&#x3c;Пред',
+                        nextText: 'След&#x3e;',
+                        currentText: 'Сегодня',
+                        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                        monthNamesShort: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                        dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+                        dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+                        dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+                        weekHeader: 'Нед',
+                        dateFormat: 'dd.mm.yy',
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: ''
+                    };
+                    $.datetimepicker3.setDefaults($.datepicker.regional['my']);
+                }),
         $('#datetimepicker2').datetimepicker({
-            dateFormat:'dd.mm.yyyy'
+            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.']
         }),
-        $('#bootstrapModalFullCalendar').fullCalendar({
+                $('#bootstrapModalFullCalendar').fullCalendar({
             nextDayThreshold: '00:00:00',
             header: {
                 left: 'prev,next today',

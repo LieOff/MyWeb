@@ -5,6 +5,7 @@
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UPortal</title>
     <%@include file="WEB-INF/jspf/css.jspf" %>
 </head>
@@ -14,7 +15,13 @@
 
 <%@include file="WEB-INF/jspf/top_bar.jspf" %>
 
-
+<style>
+    img {
+        display: inline-block;
+        height: auto;
+        max-width: 100%;
+    }
+</style>
 <div class="container">
     <div class="blog-header">
         <h1 class="blog-title"><c:out value="${news.header}"/></h1>
@@ -23,9 +30,11 @@
         </c:forEach>
     </div>
     <div class="blog-post">
+        <div class="col-md-8">
         <p>
             <c:out value="${news.text}" escapeXml="false"/>
         </p>
+        </div>
     </div>
 </div>
 </div>

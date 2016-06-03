@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <html>
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UPortal</title>
     <%@include file="WEB-INF/jspf/css.jspf" %>
 </head>

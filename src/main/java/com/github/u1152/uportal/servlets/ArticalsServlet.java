@@ -9,6 +9,10 @@ import com.github.u1152.uportal.localdaoimpl.AuthorDaoExampleImpl;
 import com.github.u1152.uportal.model.Articals;
 import com.github.u1152.uportal.model.ArticalsProp;
 import com.github.u1152.uportal.model.Author;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -107,20 +112,61 @@ public class ArticalsServlet extends HttpServlet {
         articals.setTextArticals(request.getParameter("textArticals"));
         articals.setDescription(request.getParameter("description"));
         articals.setDateCreate(request.getParameter("dateCreate"));
-        String arrayidauthor[] = request.getParameterValues("authors");
+        String arrayidauthor[] = request.getParameterValues("authorssel");
         Set<Author> newAuthor = new HashSet<>();
-        for(String s: arrayidauthor) {
-            newAuthor.add(authorDao.getById(Integer.valueOf(s)));
+        System.out.print("StartOUTPUT");
+        Set<ArticalsProp> articalsPropHashSet = new HashSet<>();
+        List<FileItem> multiparts = null;
+        Boolean havefile = false;
+        try {
+            multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+            String inputName = null;
+            for(FileItem item : multiparts){
+                if(item.isFormField()){  // Check regular field.
+                    inputName = (String)item.getFieldName();
+                    if(inputName.equalsIgnoreCase("authorssel")){
+                        String username = (String)item.getString();
+                        System.out.println("UserName is:"+username);
+                        newAuthor.add(authorDao.getById(Integer.valueOf(username)));
+                    }
+                    if(inputName.equalsIgnoreCase("authorssel")){
+                        String s = (String) item.getString();
+                        articalsPropHashSet.add(articalsPropDao.getById(Integer.valueOf(s)));
+                    }
+                    if(inputName.equalsIgnoreCase("textArticals")){
+                        String s = (String) item.getString();
+                        articals.setTextArticals(s);
+                    }
+                    if(inputName.equalsIgnoreCase("description")){
+                        String s = (String) item.getString();
+                        articals.setDescription(s);
+                    }
+                    if(inputName.equalsIgnoreCase("dateCreate")){
+                        String s = (String) item.getString();
+                        articals.setDateCreate(request.getParameter("s"));
+                    }
+                }
+            }
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
+        //System.out.print(arrayidauthor);
+        //for(String s: arrayidauthor) {
+        //    newAuthor.add(authorDao.getById(Integer.valueOf(s)));
+        //}
         if (!newAuthor.isEmpty()) {
             articals.setAuthors(newAuthor);
         }else {}
 
-        String idProp[] = request.getParameterValues("prop1");
-        Set<ArticalsProp> articalsPropHashSet = new HashSet<>();
-        for(String s: idProp) {
-            articalsPropHashSet.add(articalsPropDao.getById(Integer.valueOf(s)));
-        }
+       // String idProp[] = request.getParameterValues("prop1");
+
+        //for(String s: idProp) {
+        //    articalsPropHashSet.add(articalsPropDao.getById(Integer.valueOf(s)));
+       // }
         if (!articalsPropHashSet.isEmpty()) {
             articals.setArticalsProps(articalsPropHashSet);
         }else {}
@@ -128,6 +174,7 @@ public class ArticalsServlet extends HttpServlet {
 
         String stringId = request.getParameter("id");
         if (stringId == null || stringId.isEmpty()) {
+            if (!havefile){articals.setFileName("");}
             articalsDao.add(articals);
         } else {
             articals.setId(Integer.valueOf(stringId));

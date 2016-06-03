@@ -44,7 +44,7 @@
 
 
             <div id="div-forms">
-                <form id="login-form" action="autific">
+                <form id="login-form" method="post" action="autific">
                     <div class="modal-body">
                         <div id="div-login-msg">
                             <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="modal-footer">
                         <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
+                            <button type="submit" name="act" class="btn btn-primary btn-lg btn-block" value="In">Войти</button>
                         </div>
 
                     </div>

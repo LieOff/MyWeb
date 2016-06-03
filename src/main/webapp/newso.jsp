@@ -16,6 +16,7 @@
 <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UPortal</title>
 
 </head>

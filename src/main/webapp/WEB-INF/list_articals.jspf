@@ -5,9 +5,10 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-8">
-                  <h4><c:out value="${artical.description}" />
+                  <h4><b><c:out value="${artical.description}" /></b>
                   </h4>
                 </div>
+
                 <div class="col-md-2 text-right">
                     <a class="btn btn-default" href="articals?action=edit&id=<c:out value="${artical.id}"/>">
                         <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span>
@@ -16,7 +17,9 @@
                         <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
                     </a>
                 </div>
-
+                <div class="col-md-8">
+                    <c:out value="${artical.textArticals}" />
+                </div>
                 <div class="col-md-8">
                     авторы:
                     <c:forEach items="${artical.authors}" var="authors">

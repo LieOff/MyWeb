@@ -15,6 +15,8 @@ public class Articals {
     @GeneratedValue
     private int id;
 
+    @Column(name = "FileName")
+    private  String filename;
     @Column(name = "TextArticals")
     private String textArticals;
 
@@ -54,6 +56,14 @@ public class Articals {
 
     public void setId(int ID) {
         this.id = ID;
+    }
+
+    public String getFileName() {
+        return filename;
+    }
+
+    public void setFileName(String FileName) {
+        this.filename = FileName;
     }
 
     public String getTextArticals() {
@@ -106,14 +116,7 @@ public class Articals {
         return getId() == articals.getId();
     }
 
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + getTextArticals().hashCode();
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + getDateCreate().hashCode();
-        return result;
-    }
+
 
     @Override
     public String toString() {
